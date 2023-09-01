@@ -9,40 +9,78 @@
       }
       .PFP{
         border-style: groove;
-        border-radius: 40px;
-        border-color: aqua;
-        position:relative;
-        
-
+        border-radius: 75px;
+        border: 5px solid black;
       }
-      .Name{
+      .Mail
+      {
+        display: flex;
+        align-items: center;
+        color: black;
+      }
+      .Phone 
+      {
+        color: black;
+        display: flex;
+        align-items: center;
+      }
+      .Mail img{
+        margin-right: 1%;
+      }
+      .Phone img{
+        margin-right: 1%;
+      }
+      a{
+        text-decoration: none;
+      }
+  
+      .container{
+        display: flex;
+        
+    
+      }
+      .right{
+       
+        min-width: 40%;
+        margin-top: 2%;
+      }
+      .left{
+        min-width: 40%;
+        padding-left: 50px;
         
       }
-   
 
 
+      
     </style> 
-   
     <title>CV Nasir jama elmi</title>
 </head>
 <body>
 
-  
-  <H1 class="Name">Nasir jama elmi</H1>
+  <div class="container">
+
+  <div class="left">
+
+  <h1>Nasir jama elmi</h1>
   <img src="img/CvPic.jpg"  alt="CV" width="218px" height="290px" class="PFP">
   <h2>Student</h2>
 
-  <a href="mailto:jana22oj@student.ju.se"><img src="img/mail.png" alt="Mail-icon" width="20px" height="20px" >jana22oj@student.ju.se</a >
+  <a class="Mail" href="mailto:jana22oj@student.ju.se"><img src="img/mail.png" alt="Mail-icon" width="20px" height="20px" >jana22oj@student.ju.se</a >
   
-  <P>Adress: Jonkoping, Smedjegatan 10  </P>
-    <p><a href="tel:0739401697"> <img src="img/Phone.jpg" alt="Phone" width="20px" height="20px">0739401697</a></p>
+  <P> Adress: Jonkoping, Smedjegatan 10  </P>
+  <a class="Phone" href="tel:0739401697"> <img src="img/Phone.jpg" alt="Phone" width="20px" height="20px">0739401697</a>
 
-  <h3>Education</h3>
+  <h3 >Education</h3>
   <ul>
     <li> 2015 High school at LBS Jonkoping</li>
     <li> 2022 Studying software development in Jonkoping university</li>
   </ul>
+
   
+  </div>
+ 
+  <div class="right"> 
+ 
 
   <h3> Professional experience</h3>
   <ul>
@@ -79,6 +117,8 @@
   <li> Reading</li>
 
   </ul>
+</div>
+</div>
   
   
 
