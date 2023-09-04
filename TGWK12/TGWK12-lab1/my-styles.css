@@ -54,7 +54,8 @@ a{
 }
 .contact{
 
-   display: flex;
+   
+   display: block;
    align-items: center;
    justify-content: center;
    margin-top: 2%;
@@ -71,15 +72,17 @@ a{
 }
 .phone
 {
-    width: 100%;
-    font-size: 30px;
-    justify-content:center;
+   display: flex;
+   justify-content: left;
+   font-size: 30px;
+   margin-left: 5%;
+   color: white;
+    
 }
 #phone
 { 
-    font-size: 50px;
+    font-size: 40px;
     margin-right: 20px;
-    
 }
 #mail
 {
