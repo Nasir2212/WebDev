@@ -6,11 +6,14 @@
     font-family: "Montserrat", sans-serif;
     
 }
+/* Backgroundpic is from this url where it is use safe to use for non-commercial reason
+link is here https://pixabay.com/sv/photos/vattenf%C3%A4rg-m%C3%A5lning-f%C3%A4rgrik-konst-2681039/ */
 body{
 
-    background: url("img/Backgroundpic.jpg"), none;
+    background: url("img/watercolor-2681039_1920.jpg"), none;
+    background-size: cover;
+    background-repeat: no-repeat;
     width: 100%;
-
 }
 nav{
     background-color: black;
