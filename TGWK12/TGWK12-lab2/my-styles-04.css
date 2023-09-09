@@ -1,0 +1,40 @@
+.container
+{
+  max-width: 900px;
+  display: flex;
+  flex-direction: row;
+  margin: auto;
+}
+
+a{
+  text-decoration: none;
+  color: black;
+}
+.left
+{
+  padding: 10px;
+}
+.right
+{
+  padding: 10px;
+}
+.pfp
+{
+  border-radius: 50%;
+  border: 5px solid black;
+}
+
+.contact-icon
+{
+  font-size: 20px;
+  margin-right: 10px;
+}
+
+ @media only screen and (max-width:800px)
+{
+    .container
+    {
+      flex-direction: column;
+      margin:auto;
+    }
+}
