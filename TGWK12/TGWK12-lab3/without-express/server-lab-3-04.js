@@ -7,10 +7,9 @@ const fs = require('fs');
 
 
 const routeMap = {
-    "/": "./my-styles-05.html", 
+    "/": "./my-cv-05.html", 
     "/img/CvPicSquare.jpg": "img/CvPicSquare.jpg",
     "/css/my-styles-05.css": "./css/my-styles-05.css"
-  
 };
 
 const server = http.createServer((request, response) => {
@@ -20,7 +19,6 @@ const server = http.createServer((request, response) => {
             response.setHeader('Content-Type', 'image/jpg');
             
         }
-
         fs.readFile(routeMap[request.url], (error, data) => {
             response.write(data);
             response.end();
