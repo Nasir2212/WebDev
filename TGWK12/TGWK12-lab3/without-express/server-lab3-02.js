@@ -15,7 +15,7 @@ htmlpage = `<!DOCTYPE html>
 const server = http.createServer(function (req, res)
 {
     res.statusCode = 200;
-    res.setHeader('Content-typ' , 'text/html');
+    res.setHeader('Content-typ' ,    'text/html');
     res.end(htmlpage);
 });
 

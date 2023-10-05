@@ -2,8 +2,7 @@ const port = 4567;
 
 //NodeJS Core Modules
 const http = require('http');
-const fs = require('fs');
-
+const fs = require('fs');   
 
 
 const routeMap = {
@@ -28,6 +27,5 @@ const server = http.createServer((request, response) => {
         response.end("<h1>Sorry, page not found</h1>");
     }
 })
-
 server.listen(port);
 console.log(`The server is listening on port: ${port}`);
