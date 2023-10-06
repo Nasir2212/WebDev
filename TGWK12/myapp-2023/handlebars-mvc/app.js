@@ -1,18 +1,19 @@
 const express = require('express') // loads the express package
-const { engine } = require('express-handlebars'); // loads handlebars for Express
+const { engine } = require('express-handlebars') // loads handlebars for Express
 const sqlite3 = require('sqlite3')
 const bodyParser = require('body-parser')
 const session = require('express-session')
 const connectSqlite3 = require('connect-sqlite3')
 const cookieParser = require('cookie-parser')
+
 const port = 8080 // defines the port
 const app = express() // creates the Express application
 
 
-app.use(bodyParser.urlencoded({extended:false}))
-app.use(bodyParser.json())
+const db = new sqlite3.Database('projects-jl.db') //Model (Data)
 
-const SQliteStore = connectSqlite3(session)
+
+const SQliteStore = connectSqlite3(session);
 
 app.use(session({
   store: new SQliteStore({db: "session-db.db"}),
@@ -21,8 +22,14 @@ app.use(session({
   "secret": "This123Is@Another#456GreatSecret678%Sentence"
 }));
 
-//Model (Data)
-const db = new sqlite3.Database('projects-jl.db')
+
+app.use(bodyParser.urlencoded({extended: false}))
+app.use(bodyParser.json())
+
+
+
+app.use(express.static('public'))
+
 
 
 
@@ -32,7 +39,8 @@ db.run("CREATE TABLE projects (pid INTEGER PRIMARY KEY, pname TEXT NOT NULL, pye
 if (error) {
 // tests error: display error
 console.log("ERROR: ", error)
-} else {
+} else 
+{
 // tests error: no error, the table has been created
 console.log("---> Table projects created!")
 const projects=[
@@ -162,10 +170,6 @@ app.get('/projects',function(request, response)
   })
 })
 
-app.use(express.static('public'))
-
-app.use(bodyParser.urlencoded({extended: false}))
-app.use(bodyParser.json())
 
 
 
