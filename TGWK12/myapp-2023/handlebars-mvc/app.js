@@ -150,14 +150,6 @@ app.set('views', './views');
 // define static directory "public" to access css/ and img/
 app.use(express.static('public'))
 
-// MODEL (DATA)
-const humans = [
-  { "id": "0", "name": "Jerome" },
-  { "id": "1", "name": "Mira" },
-  { "id": "2", "name": "Linus" },
-  { "id": "3", "name": "Susanne" },
-  { "id": "4", "name": "Jasmin" },
-]
 
 
 // runs the app and listens to the port
@@ -250,15 +242,16 @@ app.get('/projects/delete/:id', (req, res) => {
           name: req.session.name,
           isAdmin: req.session.isAdmin,
         }
-        res.render("home.handlebars", model)
+        res.render('home.handlebars', model)
       }
       else {
-        const model = { dbError: false, theError: "",
+        const model = {
+          dbError: false, theError: "",
           isLoggedIn: req.session.isLoggedIn,
           name: req.session.name,
           isAdmin: req.session.isAdmin,
         }
-        res.render("home.handlebars", model)
+        res.render('home.handlebars', model)
       }
     })
   } else {
@@ -266,8 +259,92 @@ app.get('/projects/delete/:id', (req, res) => {
   }
 });
 
+app.get('/projects/new', (req, res) => {
+  if (req.session.isLoggedIn == true && req.session.isAdmin == true) {
+    const model = {
+      isLoggedIn: req.session.isLoggedIn,
+      name: req.session.name,
+      isAdmin: req.session.isAdmin,
+    }
+    res.render('newproject.handlebars', model)
+  } else {
+    res.redirect('/login')
+  }
+});
 
+app.post('/projects/new', (req, res) => {
+  const newp = [
+    req.body.projname, req.body.projyear, req.body.projdesc, req.body.projtype, req.body.projimg,
+  ]
+  if (req.session.isLoggedIn == true && req.session.isAdmin == true) {
+    db.run("INSERT INTO projects (pname, pyear, pdesc, ptype, pimgURL) VALUES (?, ?, ?, ?, ?)", newp, (error) => {
+      if (error) {
+        console.log("ERROR: ", error)
+      }else {
+        console.log("Line added into the projects table!")
+      }
+      res.redirect('/projects')
+    })
+  } else {
+    res.redirect('/login')
+  }
+});
 
+//sends the form to modify a project
+app.get('/projects/update/:id', (req, res) => {
+  const id = req.params.id
+  db.get("SELECT * FROM projects WHERE pid=?", [id], function (error, theProject) {
+    if (error) {
+      console.log("ERROR: ", error)
+      const model = {
+        dbError: true, theError: error,
+        project: {},
+        isLoggedIn: req.session.isLoggedIn,
+        name: req.session.name,
+        isAdmin: req.session.isAdmin,
+      }
+      res.render("modifyproject.handlebars", model)
+    }
+    else {
+      //console.log("MODIFY: ", JSON.stringify(theProject))
+      //console.log("MODIFY: ", theProject)
+      const model = {
+        dbError: false, theError: "",
+        project: theProject,
+        isLoggedIn: req.session.isLoggedIn,
+        name: req.session.name,
+        isAdmin: req.session.isAdmin,
+        helpers: {
+          theTypeR(value) { return value == "Reserch"; },
+          theTypeT(value) { return value == "Teaching"; },
+          theTypeO(value) { return value == "Other"; }
+        }
+      }
+      //renders the page with the model
+      res.render("modifyproject.handlebars", model)
+    }
+  })
+});
+
+app.post('/projects/update/:id', (req, res) => {
+  const id = req.params.id
+  const newp = [
+    req.body.projname, req.body.projyear, req.body.projdesc, req.body.projtype, req.body.projimg, id
+  ]
+  if (req.session.isLoggedIn == true && req.session.isAdmin == true) {
+    db.run("UPDATE projects SET pname=?, pyear=?, pdesc=?, ptype=?, pimgURL=? WHERE pid=?", newp, (error) => {
+      if (error) {
+        console.log("ERROR: ", error)
+      } else {
+        console.log("Project updated!")
+      }
+      res.redirect('/projects')
+    })
+  }
+  else {
+    res.redirect('/login')
+  }
+});
 app.get('/contact', function (request, response) {
 
   const model = {
@@ -279,8 +356,6 @@ app.get('/contact', function (request, response) {
 
 });
 
-
-
 app.get('/login', function (request, response) {
 
   const model = {
@@ -289,10 +364,7 @@ app.get('/login', function (request, response) {
     isAdmin: request.session.isAdmin
   }
   response.render('login.handlebars', model)
-
 });
-
-
 
 
 app.post('/login', (req, res) => {
@@ -315,6 +387,14 @@ app.post('/login', (req, res) => {
   }
   console.log("LOGIN: ", un)
   console.log("PASSWORD: ", pw)
+})
+
+app.get('/logout', (req, res) => {
+  req.session.destroy( (err) => {
+    console.log("Error while destroying the session: ", err)
+  })
+  console.log('Logged out...')
+  res.redirect('/')
 })
 
 
