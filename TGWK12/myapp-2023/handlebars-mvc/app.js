@@ -5,6 +5,8 @@ const bodyParser = require('body-parser')
 const session = require('express-session')
 const connectSqlite3 = require('connect-sqlite3')
 const cookieParser = require('cookie-parser')
+const bcrypt = require('bcrypt');
+const saltRounds = 10; // Number of salt rounds for bcrypt
 
 const port = 8080 // defines the port
 const app = express() // creates the Express application
@@ -30,6 +32,38 @@ app.use(session({
   "secret": "This123Is@Another#456GreatSecret678%Sentence"
 }));
 
+db.run("CREATE TABLE IF NOT EXISTS users (id INTEGER PRIMARY KEY AUTOINCREMENT, username TEXT NOT NULL UNIQUE, password_hash TEXT NOT NULL)", (error) => {
+  if (error) {
+    console.log("ERROR: ", error);
+  } else {
+    console.log('Users table created successfully.');
+
+    const users = [
+      { "username": "Yuji", "password": "itadori" },
+      { "username": "Nasir", "password": "jama elmi" },
+      { "username": "Hero", "password": "Batman" },
+      { "username": "Best-Teacher", "password": "Jerome" }
+    ];
+
+    users.forEach((user) => {
+      // Hash the password using bcrypt
+      bcrypt.hash(user.password, saltRounds, (hashError, hash) => {
+        if (hashError) {
+          console.log("Hashing Error: ", hashError);
+        } else {
+          // Insert the user with the hashed password into the "users" table
+          db.run("INSERT INTO users (username, password_hash) VALUES (?, ?)", [user.username, hash], (insertError) => {
+            if (insertError) {
+              console.log("INSERT ERROR: ", insertError);
+            } else {
+              console.log("User added to the users table!");
+            }
+          })
+        }
+      })
+    })
+  }
+})
 
 // creates table projects at startup
 db.run("CREATE TABLE projects (pid INTEGER PRIMARY KEY, pname TEXT NOT NULL, pyear INTEGER NOT NULL, pdesc TEXT NOT NULL, ptype TEXT NOT NULL, pimgURL TEXT NOT NULL)", (error) => {
@@ -280,7 +314,7 @@ app.post('/projects/new', (req, res) => {
     db.run("INSERT INTO projects (pname, pyear, pdesc, ptype, pimgURL) VALUES (?, ?, ?, ?, ?)", newp, (error) => {
       if (error) {
         console.log("ERROR: ", error)
-      }else {
+      } else {
         console.log("Line added into the projects table!")
       }
       res.redirect('/projects')
@@ -390,7 +424,7 @@ app.post('/login', (req, res) => {
 })
 
 app.get('/logout', (req, res) => {
-  req.session.destroy( (err) => {
+  req.session.destroy((err) => {
     console.log("Error while destroying the session: ", err)
   })
   console.log('Logged out...')
