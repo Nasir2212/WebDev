@@ -13,7 +13,7 @@
     box-sizing: content-box;
     /*border: 3px solid gray;*/
 }
-.cardjl {
+.card {
     display: flex;
     border: 1px solid grey;
     border-radius: 16px;
@@ -60,4 +60,9 @@
 .login-button
 {
     padding-left: 20%;
+}
+.card-img
+{
+    width: 200px;
+    
 }
