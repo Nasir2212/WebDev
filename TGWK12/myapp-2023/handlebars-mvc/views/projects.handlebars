@@ -14,7 +14,7 @@
             </div>
             {{else}}
             {{#each projects}}
-            <div class="column col-4 col-md-6 col-sm-12">
+            <div class="column col-5 col-md-5 col-sm-12">
                 <div class="card">
                     <div class="card-image">
                         <img src="{{pimgURL}}" alt="{{pimgURL}}" class="img-responsive">
@@ -22,6 +22,9 @@
                     <div class="card-header">
                         <div class="card-title h3">{{pname}}</div>
                         <div class="card-subtilte text-grey">{{pyear}} --- {{ptype}}</div>
+                    </div>
+                    <div class="card-text">
+                        <div class="card-desc">{{pdesc}}</div>
                     </div>
                     <div class="card-footer">
                         {{#if ../isAdmin}}
@@ -32,6 +35,7 @@
                     </div>
                 </div>
             </div>
+            <div class="column col-1 col-md-1"></div>
             {{/each}}
             {{/if}}
         </div>

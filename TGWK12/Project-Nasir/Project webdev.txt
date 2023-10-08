@@ -1,0 +1,17 @@
+Project webdev
+- 5 tables 
+Tables
+Done project-table
+Done user-table
+education-table
+skills-table
+contact-table
+
+Done Security 
+
+ask about - session and cookies
+
+use crud operations(among get,post,put,delete) 
+
+CSS framework
+

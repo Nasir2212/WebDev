@@ -1,0 +1,43 @@
+<div id="main">
+    <div>
+        <h1>Modify Education</h1>
+        <div>
+            {{#if isLoggedIn}}
+            {{#if isAdmin}}
+            
+            <form action="/education/update/{{education.eid}}" method="post">
+                <fieldset>
+                    <label for="educname">Education name: </label>
+                    <input type="text" name="educname" id="educname" value="{{education.ename}}" required="required">
+                    <br />
+                    <label for="educyear">Education year:</label>
+                    <input type="number" name="educyear" id="educyear" placeholder="2023" value="{{education.eyear}}"
+                        required="required">
+                    <br />
+                    <textarea name="educdesc" id="educdesc" cols="30" rows="10" required="required">{{education.edesc}}</textarea>
+                    <label for="eductype">Education type:</label>
+                    <select name="eductype" id="eductype" required="requried">
+                        <option value="Reserch"{{#if (theTypeR education.etype)}} selected="selected" {{/if}}>Reserch</option>
+                        <option value="Teaching"{{#if (theTypeT education.etype)}} selected="selected" {{/if}}>Teaching</option>
+                        <option value="Other"{{#if (theTypeO education.etype)}} selected="selected" {{/if}}>Other</option>
+                    </select>
+                    <br />
+                    <label for="educimg">Education image URL: </label>
+                    <input type="text" name="educimg" id="educimg" placeholder="/img/" value="{{education.eimgURL}}"
+                        required="requried">
+                    <br />
+                </fieldset>
+                <input type="submit" value="Add Education">
+            </form>
+            {{else}}
+            <p>Sorry, you must be an adminstrator to add a new Education!</p>
+            {{/if}}
+            {{else}}
+            <p>
+                Sorry, you must be an adminstrator to add new Education<br />
+                please go to the <a href="/login">login</a> page.
+            </p>
+            {{/if}}
+        </div>
+    </div>
+</div>

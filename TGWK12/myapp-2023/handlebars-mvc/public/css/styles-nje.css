@@ -13,56 +13,57 @@
     box-sizing: content-box;
     /*border: 3px solid gray;*/
 }
+
 .card {
     display: flex;
-    border: 1px solid grey;
-    border-radius: 16px;
+    border: 1px solid;
+    border-color: rgb(163, 163, 163);
+    border-radius: 2rem;
     padding: 8px;
     box-sizing: border-box;
-    background-color: blanchedalmond;
+    background-color: white;
     margin-bottom: 8px;
-    position: relative;
+    flex: 1;
+    padding: 1.5rem;
+
+
 }
-.projectsImg
-{
-    width: 12vw;
-    min-width: 12vw;
+
+.img-responsive {
+    max-width: 30vw;
     padding: 8px;
-    border: 1px solid black;
     border-radius: 16px;
     background-color: white;
     box-sizing: border-box;
 }
-.centerVert
-{
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-}
-.padding 
-{
+
+.padding {
     padding: 8px;
     box-sizing: border-box;
 }
-.navbar
-{
+
+.navbar {
     margin-left: 20%;
     list-style-type: none;
     width: 50%;
 }
-.navbar-li
-{
+
+.navbar-li {
     margin-left: 10%;
     width: 100%;
     list-style-type: none;
-
 }
-.login-button
-{
+#menu a {
+    color: black;
+    
+  }
+
+
+.login-button {
     padding-left: 20%;
 }
-.card-img
-{
+
+.card-img {
     width: 200px;
-    
+
 }

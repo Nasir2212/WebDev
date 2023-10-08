@@ -4,6 +4,7 @@
         <div>
             {{#if isLoggedIn}}
             {{#if isAdmin}}
+            
             <form action="/projects/update/{{project.pid}}" method="post">
                 <fieldset>
                     <label for="projname">Project name: </label>
