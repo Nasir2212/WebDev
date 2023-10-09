@@ -118,19 +118,18 @@ db.run("CREATE TABLE projects (pid INTEGER PRIMARY KEY, pname TEXT NOT NULL, pye
     console.log("---> Table projects created!")
     const projects = [
       {
-        "id": "1", "name": "Counting people with a camera", "type": "research", "desc": "The purpose of this project is to count people passing through a corridor and to know how many are in the room at a certain time.", "year": 2022, "dev": "Python and OpenCV (Computer vision) library",
-        "url": "/img/counting.png"
+        "id": "1", "name": "Tictactoe", "type": "Programming", "desc": "The purpose of this project is to learn how to code in java and how object-oriented programming works.",
+         "year": 2023, "url": "/img/counting.png"
       },
       {
-        "id": "2", "name": "Visualisation of 3D medical images", "type": "research", "desc": "The project makes a 3D model of the analysis of the body of a person and displays the detected health problems. It is useful for doctors to view in 3D their patients and the evolution of a disease.", "year":
-          2012, "url": "/img/medical.png"
+        "id": "2", "name": "Encryption project", "type": "Programming", "desc": "The project takes in a text and depending on the encryption-key it changes exampel abc with the encrypt key 4 to lin and with the decrypt button switches back to abc. It is useful for doctors to view in 3D their patients and the evolution of a disease.", "year":
+          2023, "url": "/img/medical.png"
       },
-      { "id": "3", "name": "Multiple questions system", "type": "teaching", "desc": "During the lockdowns in France, this project was useful to test the students online with a Quizz system.", "year": 2021, "url": "/img/qcm07.png" },
+      { "id": "3", "name": "Worm game", "type": "Programming", "desc": "When we started with the object-oriented course i created a worm-game", "year": 2023, "url": "/img/qcm07.png" },
       {
-        "id": "4", "name": "Image comparison with the Local Dissmilarity Map", "desc": "The project is about finding and quantifying the differences between two images of the same size. The applications were numerous: satallite imaging, medical imaging,...", "year": 2020, "type": "research",
+        "id": "4", "name": "web development", "desc": "Creating a website where i have my portfolio which is this site", "year": 2023, "type": "Project",
         "url": "/img/diaw02.png"
-      },
-      { "id": "5", "name": "Management system for students' internships", "desc": "This project was about the creation of a database to manage the students' internships.", "year": 2012, "type": "teaching", "url": "/img/management.png" }
+      }
     ]
     // inserts projects
     projects.forEach((oneProject) => {
@@ -525,8 +524,8 @@ app.get('/projects/update/:id', (req, res) => {
         name: req.session.name,
         isAdmin: req.session.isAdmin,
         helpers: {
-          theTypeR(value) { return value == "Reserch"; },
-          theTypeT(value) { return value == "Teaching"; },
+          theTypeR(value) { return value == "Programming"; },
+          theTypeT(value) { return value == "Project"; },
           theTypeO(value) { return value == "Other"; }
         }
       }

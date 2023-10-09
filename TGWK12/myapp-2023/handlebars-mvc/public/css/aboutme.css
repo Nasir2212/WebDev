@@ -1,0 +1,21 @@
+#main {
+    display: flex;
+    justify-content: space-around;
+    margin: 20px;
+}
+
+.box {
+    display: flex;
+    gap: 10rem;
+}
+
+.box div {
+    max-width: 400px; /* Adjust the width as needed */
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10%; /* Make the image round */
+    padding: 10px; /* Add padding for a nicer appearance */
+}

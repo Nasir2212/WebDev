@@ -9,21 +9,24 @@ body {
     font-family: 'Poppins', sans-serif;
 }
 
-nav, .nav-links {
+nav,
+.nav-links {
     display: flex;
 }
 
 nav {
-    justify-content: space-between; /* Change to space-between to utilize flex-grid principle */
+    justify-content: space-between;
+    /* Change to space-between to utilize flex-grid principle */
     align-items: center;
-    height: 17vh    ;
+    height: 17vh;
 }
 
 .nav-links {
     gap: 2rem;
     list-style: none;
     font-size: 1.5rem;
-    display: flex; /* Utilize flex for better responsiveness */
+    display: flex;
+    /* Utilize flex for better responsiveness */
 }
 
 a {
@@ -91,44 +94,64 @@ p {
     color: rgb(85, 85, 85);
 }
 
-a, .btn {
+a,
+.btn {
     transition: all 300ms ease;
 }
 
 /* Add this CSS for the black login button */
 .btn.btn-link {
     color: black;
-    transition: color 300ms ease; /* Add a transition effect for a smooth color change */
+    transition: color 300ms ease;
+    /* Add a transition effect for a smooth color change */
 }
 
 .btn.btn-link:hover {
-    color: #333; /* Darken the color on hover */
+    color: #333;
+    /* Darken the color on hover */
 }
 
 .navbar-section {
-    display: flex; /* Utilize flex for better responsiveness */
+    display: flex;
+    /* Utilize flex for better responsiveness */
     align-items: center;
 }
-@media screen and (max-width: 768px) {
+
+
+@media screen and (max-width: 900px) {
     .columns {
-        flex-direction: column; /* Stack columns vertically on smaller screens */
+        flex-direction: column;
+        /* Stack columns vertically on smaller screens */
     }
 
     .column {
-        width: 100%; /* Make each column take up full width on smaller screens */
+        width: 100%;
+        /* Make each column take up full width on smaller screens */
     }
 
     .navbar-section {
-        flex-direction: column; /* Stack navbar items vertically on smaller screens */
-        text-align: center; /* Center-align text in each navbar item */
+        flex-direction: column;
+        /* Stack navbar items vertically on smaller screens */
+        text-align: center;
+        /* Center-align text in each navbar item */
     }
 
     .btn-link {
-        margin-right: 0; /* Remove right margin on small screens */
-        margin-bottom: 10px; /* Add bottom margin for spacing between items on small screens */
+        margin-right: 0;
+        /* Remove right margin on small screens */
+        margin-bottom: 10px;
+        /* Add bottom margin for spacing between items on small screens */
     }
 
     .logo {
-        margin-bottom: 10px; /* Add bottom margin for spacing between logo and items on small screens */
+        margin-bottom: 10px;
+        /* Add bottom margin for spacing between logo and items on small screens */
     }
+    #section_pic-container
+    {   
+        width: 150px;
+        display: block;
+        margin-top: 300px;
+    }
+    
 }

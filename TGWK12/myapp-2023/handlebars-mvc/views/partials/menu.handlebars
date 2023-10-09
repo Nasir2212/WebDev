@@ -1,31 +1,25 @@
 <header id="menu">
-    <div class="container">
-        <div class="columns">
-            <div class="column col-12 col-md-12 col-sm-3">
-                <nav id="desktop-nav" class="navbar">
-                    <section class="navbar-section">
-                        <div class="logo">Nasir Jama Elmi</div>
-
-                        <a href="/home" class="btn btn-link">Home</a>
-                        <a href="/about" class="btn btn-link">About</a>
-                        <a href="/education" class="btn btn-link">Education</a>
-                        <a href="/projects" class="btn btn-link">Projects</a>
-                        <a href="/contact" class="btn btn-link">Contact</a>
-                        {{#if isLoggedIn}}
-                        <div class="dropdown">
-                            <a href="#" class="btn btn-link dropdown-toggle">
-                                Hi, {{name}}!
-                            </a>
-                            <ul class="menu">
-                                <li><a href="/logout" class="btn btn-link" id="black-login-btn">Logout</a></li>
-                            </ul>
-                        </div>
-                        {{else}}
-                        <a href="/login" class="btn btn-link" id="black-login-btn">Login</a>
-                        {{/if}}
-                    </section>
-                </nav>
+    <nav id="desktop-nav" class="navbar">
+        <section class="navbar-section">
+            <div class="logo">Nasir Jama Elmi</div>
+            <a href="/home" class="btn btn-link">Home</a>
+            <a href="/about" class="btn btn-link">About</a>
+            <a href="/education" class="btn btn-link">Education</a>
+            <a href="/projects" class="btn btn-link">Projects</a>
+            <a href="/contact" class="btn btn-link">Contact</a>
+            {{#if isLoggedIn}}
+            <div class="dropdown">
+                <a href="#" class="btn btn-link dropdown-toggle">
+                    Hi, {{name}}!
+                </a>
+                <ul class="menu">
+                    <a href="/logout" class="btn btn-link" id="black-login-btn">Logout</a>
+                </ul>
             </div>
-        </div>
-    </div>
+            {{else}}
+            <a href="/login" class="btn btn-link" id="black-login-btn">Login</a>
+            {{/if}}
+        </section>
+    </nav>
+
 </header>

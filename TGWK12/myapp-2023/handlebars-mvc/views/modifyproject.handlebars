@@ -1,3 +1,5 @@
+<link rel="stylesheet" href="/css/modify.css">
+
 <div id="main">
     <div>
         <h1>Modify project</h1>
@@ -17,8 +19,8 @@
                     <textarea name="projdesc" id="projdesc" cols="30" rows="10" required="required">{{project.pdesc}}</textarea>
                     <label for="projtype">Project type:</label>
                     <select name="projtype" id="projtype" required="requried">
-                        <option value="Reserch"{{#if (theTypeR project.ptype)}} selected="selected" {{/if}}>Reserch</option>
-                        <option value="Teaching"{{#if (theTypeT project.ptype)}} selected="selected" {{/if}}>Teaching</option>
+                        <option value="Programming"{{#if (theTypeR project.ptype)}} selected="selected" {{/if}}>Programming</option>
+                        <option value="Project"{{#if (theTypeT project.ptype)}} selected="selected" {{/if}}>Project</option>
                         <option value="Other"{{#if (theTypeO project.ptype)}} selected="selected" {{/if}}>Other</option>
                     </select>
                     <br />
