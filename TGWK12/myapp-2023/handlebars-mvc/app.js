@@ -77,20 +77,17 @@ db.run("CREATE TABLE IF NOT EXISTS education (eid INTEGER PRIMARY KEY, ename TEX
 
     const educationData = [
       {
-        "id": "1", "name": "Introduction to Computer Science", "type": "lecture", "desc": "An introductory course covering fundamental concepts in computer science.", "year": 2022, "url": "/img/Yujit-itadori.jpg"
+        "id": "1", "name": "Calcus", "type": "course", "desc": "Mathematics is the branch of mathematics that focuses on the study of change and accumulation, developed independently by Newton and Leibniz in the 17th century, including differential calculus, which looks for the number of changes of instantaneous occurrence, and the integral calculus of accumulation of numbers.", "year": 2023, "url": "/img/math.jpg"
       },
       {
-        "id": "2", "name": "Advanced Machine Learning", "type": "course", "desc": "In-depth exploration of advanced machine learning techniques and algorithms.", "year": 2021, "url": "/img/Yujit-itadori.jpg"
+        "id": "2", "name": "Object progamming", "type": "course", "desc": "Object-oriented programming is a way of writing code that groups related data and functions into objects, making it easier to manage and reuse code for building complex systems..", "year": 2023, "url": "/img/code-from-pixabay.jpg"
       },
       {
-        "id": "3", "name": "Web Development Basics", "type": "workshop", "desc": "Hands-on workshop teaching the basics of web development using HTML, CSS, and JavaScript.", "year": 2020, "url": "/img/Yujit-itadori.jpg"
+        "id": "3", "name": "Web Development Basics", "type": "course", "desc": "Hands-on workshop teaching the basics of web development using HTML, CSS, and JavaScript.", "year": 2023, "url": "/img/database.jpg"
       },
       {
-        "id": "4", "name": "Database Management Systems", "type": "course", "desc": "Study of database management systems and their applications in modern software development.", "year": 2019, "url": "/img/Yujit-itadori.jpg"
+        "id": "4", "name": "Database", "type": "course", "desc": "Study of database and sql and how to create tables and their diffrent use purpose", "year": 2023, "url": "/img/web.jpg"
       },
-      {
-        "id": "5", "name": "Software Engineering Principles", "type": "lecture", "desc": "Exploration of software engineering principles, methodologies, and best practices.", "year": 2018, "url": "/img/Yujit-itadori.jpg"
-      }
     ];
 
     // inserts education data
@@ -118,17 +115,17 @@ db.run("CREATE TABLE projects (pid INTEGER PRIMARY KEY, pname TEXT NOT NULL, pye
     console.log("---> Table projects created!")
     const projects = [
       {
-        "id": "1", "name": "Tictactoe", "type": "Programming", "desc": "The purpose of this project is to learn how to code in java and how object-oriented programming works.",
-         "year": 2023, "url": "/img/counting.png"
+        "id": "1", "name": "Tictactoe", "type": "Programming", "desc": "The purpose of this project is to learn how to code in java and how to use the mvc-model to follow the oop-princples and make the tictactoe game",
+         "year": 2023, "url": "/img/tictactoe.jpg"
       },
       {
         "id": "2", "name": "Encryption project", "type": "Programming", "desc": "The project takes in a text and depending on the encryption-key it changes exampel abc with the encrypt key 4 to lin and with the decrypt button switches back to abc. It is useful for doctors to view in 3D their patients and the evolution of a disease.", "year":
-          2023, "url": "/img/medical.png"
+          2023, "url": "/img/encryptionengine.jpg"
       },
-      { "id": "3", "name": "Worm game", "type": "Programming", "desc": "When we started with the object-oriented course i created a worm-game", "year": 2023, "url": "/img/qcm07.png" },
+      { "id": "3", "name": "Worm game", "type": "Programming", "desc": "When we started with the object-oriented course i created a worm-game where every time it eats a pixel it should grow with a pixel and set borders for it very fun", "year": 2023, "url": "/img/worm.jpg" },
       {
-        "id": "4", "name": "web development", "desc": "Creating a website where i have my portfolio which is this site", "year": 2023, "type": "Project",
-        "url": "/img/diaw02.png"
+        "id": "4", "name": "Web development", "desc": "Creating a full functional website with a database and server-side javascript. We combine all of this in order to create a responsive and modern website platform", "year": 2023, "type": "Project",
+        "url": "/img/Web-site.png"
       }
     ]
     // inserts projects
@@ -145,76 +142,35 @@ db.run("CREATE TABLE projects (pid INTEGER PRIMARY KEY, pname TEXT NOT NULL, pye
   }
 });
 
-
-
-
-// creates skills projects at startup
-db.run("CREATE TABLE skills (sid INTEGER PRIMARY KEY, sname TEXT NOT NULL, sdesc TEXT NOT NULL, stype TEXT NOT NULL)", (error) => {
+// creates table education_projects at startup
+db.run("CREATE TABLE IF NOT EXISTS education_projects (id INTEGER PRIMARY KEY, education_id INTEGER, project_id INTEGER, FOREIGN KEY (education_id) REFERENCES education (eid), FOREIGN KEY (project_id) REFERENCES projects (pid))", (error) => {
   if (error) {
-    // tests error: display error
-    console.log("ERROR: ", error)
+    console.log("ERROR: ", error);
   } else {
-    // tests error: no error, the table has been created
-    console.log("---> Table skills created!")
-    const skills = [
-      { "id": "1", "name": "PHP", "type": "Programming language", "desc": "Programming with PHP on the server side." },
-      { "id": "2", "name": "Python", "type": "Programming language", "desc": "Programming with Python." },
-      { "id": "3", "name": "Java", "type": "Programming language", "desc": "Programming with Java." },
-      { "id": "4", "name": "ImageJ", "type": "Framework", "desc": "Java Framework for Image Processing." },
-      { "id": "5", "name": "Javascript", "type": "Programming language", "desc": "Programming with Javascript on the client side." },
-      { "id": "6", "name": "Node", "type": "Programming language", "desc": "Programming with Javascript on the server side." },
-      { "id": "7", "name": "Express", "type": "Framework", "desc": "A framework for programming Javascript on the server side." },
-      { "id": "8", "name": "Scikit-image", "type": "Library", "desc": "A library for Image Processing with Python." },
-      { "id": "9", "name": "OpenCV", "type": "Library", "desc": "A library for Image Processing with Python." },
-    ]
-    // inserts skills
-    skills.forEach((oneSkill) => {
-      db.run("INSERT INTO skills (sid, sname, sdesc, stype) VALUES (?, ?, ?, ?)", [oneSkill.id, oneSkill.name, oneSkill.desc,
-      oneSkill.type], (error) => {
-        if (error) {
-          console.log("ERROR: ", error)
-        } else {
-          console.log("Line added into the skills table!")
-        }
-      })
-    })
-  }
-});
+    console.log("---> Table education_projects created!");
 
-// creates table projectsSkills at startup
-db.run("CREATE TABLE projectsSkills (psid INTEGER PRIMARY KEY, pid INTEGER, sid INTEGER, FOREIGN KEY (pid) REFERENCES projects (pid),FOREIGN KEY (sid) REFERENCES skills (sid))", (error) => {
-  if (error) {
-    // tests error: display error
-    console.log("ERROR: ", error)
-  } else {
-    // tests error: no error, the table has been created
-    console.log("---> Table projectsSkills created!")
-    const projectsSkills = [
-      { "id": "1", "pid": "1", "sid": "2" },
-      { "id": "2", "pid": "1", "sid": "8" },
-      { "id": "3", "pid": "1", "sid": "9" },
-      { "id": "4", "pid": "2", "sid": "3" },
-      { "id": "5", "pid": "2", "sid": "4" },
-      { "id": "6", "pid": "3", "sid": "1" },
-      { "id": "7", "pid": "4", "sid": "2" },
-      { "id": "8", "pid": "4", "sid": "8" },
-      { "id": "9", "pid": "4", "sid": "9" },
-      { "id": "10", "pid": "5", "sid": "1" }
-    ]
-    // inserts projectsSkills
-    projectsSkills.forEach((oneProjectSkill) => {
-      db.run("INSERT INTO projectsSkills (psid, pid, sid) VALUES (?, ?, ?)", [oneProjectSkill.id, oneProjectSkill.pid,
-      oneProjectSkill.sid], (error) => {
+    
+    const educationProjectsData = [
+      { "id": 1, "education_id": 2, "project_id": 1 },
+      { "id": 2, "education_id": 2, "project_id": 2 },
+      { "id": 3, "education_id": 3, "project_id": 4 },
+      { "id": 4, "education_id": 4, "project_id": 4 },
+      
+    
+    ];
+
+    // inserts education_projects data
+    educationProjectsData.forEach((association) => {
+      db.run("INSERT INTO education_projects (id, education_id, project_id) VALUES (?, ?, ?)", [association.id, association.education_id, association.project_id], (error) => {
         if (error) {
-          console.log("ERROR: ", error)
+          console.log("ERROR: ", error);
         } else {
-          console.log("Line added into the projectsSkills table!")
+          console.log("Line added into the education_projects table!");
         }
       });
     });
   }
 });
-
 
 // defines handlebars engine
 app.engine('handlebars', engine());
@@ -376,8 +332,8 @@ app.get('/education/update/:id', (req, res) => {
         name: req.session.name,
         isAdmin: req.session.isAdmin,
         helpers: {
-          theTypeR(value) { return value == "Reserch"; },
-          theTypeT(value) { return value == "Teaching"; },
+          theTypeR(value) { return value == "Course"; },
+          theTypeT(value) { return value == "Labs"; },
           theTypeO(value) { return value == "Other"; }
         }
       }

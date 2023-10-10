@@ -17,8 +17,8 @@
                     <textarea name="educdesc" id="educdesc" cols="30" rows="10" required="required">{{education.edesc}}</textarea>
                     <label for="eductype">Education type:</label>
                     <select name="eductype" id="eductype" required="requried">
-                        <option value="Reserch"{{#if (theTypeR education.etype)}} selected="selected" {{/if}}>Reserch</option>
-                        <option value="Teaching"{{#if (theTypeT education.etype)}} selected="selected" {{/if}}>Teaching</option>
+                        <option value="Course"{{#if (theTypeR education.etype)}} selected="selected" {{/if}}>Course</option>
+                        <option value="Labs"{{#if (theTypeT education.etype)}} selected="selected" {{/if}}>Labs</option>
                         <option value="Other"{{#if (theTypeO education.etype)}} selected="selected" {{/if}}>Other</option>
                     </select>
                     <br />

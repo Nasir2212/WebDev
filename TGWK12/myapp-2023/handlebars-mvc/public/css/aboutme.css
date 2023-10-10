@@ -2,15 +2,23 @@
     display: flex;
     justify-content: space-around;
     margin: 20px;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px;
+    
 }
-
+.about-me {
+    padding-bottom: 50px;
+}
 .box {
     display: flex;
     gap: 10rem;
+    
 }
 
 .box div {
-    max-width: 400px; /* Adjust the width as needed */
+    
+    max-width: 500px; /* Adjust the width as needed */
 }
 
 img {
@@ -19,3 +27,4 @@ img {
     border-radius: 10%; /* Make the image round */
     padding: 10px; /* Add padding for a nicer appearance */
 }
+
