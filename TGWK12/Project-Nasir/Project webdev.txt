@@ -3,7 +3,7 @@ Project webdev
 Tables
 Done project-table
 Done user-table
-education-table
+Done education-table
 skills-table
 contact-table
 

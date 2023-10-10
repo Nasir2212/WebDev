@@ -34,7 +34,7 @@ a {
     background-color: white;
     text-decoration: none;
     text-decoration-color: white;
-    margin-right: 8em;
+    margin-right: 6em;
 }
 
 a:visited {
@@ -49,9 +49,10 @@ a:hover {
 }
 
 .logo {
-    font-size: 24px;
-    padding-left: 5em;
-    padding-right: 5em;
+    font-size: 16px;
+   margin-left: 3rem;
+   margin-right: 4rem;
+    
 }
 
 .logo:hover {
@@ -112,8 +113,9 @@ a,
     display: flex;
     /* Utilize flex for better responsiveness */
     align-items: center;
+    
 }
-
+    
 
 
 @media screen and (max-width: 900px) {
@@ -149,7 +151,7 @@ a,
     {   
         width: 150px;
         display: block;
-        margin-top: 300px;
+        margin-top: 200px;
     }
     
 }
