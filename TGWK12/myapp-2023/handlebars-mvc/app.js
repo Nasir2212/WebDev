@@ -580,6 +580,151 @@ app.get('/logout', (req, res) => {
   })
   console.log('Logged out...')
   res.redirect('/')
-})
+});
 
+// List all users
+app.get('/users', function (req, res) {
+  db.all("SELECT * FROM users", function (error, theUsers) {
+    if (error) {
+      const model = {
+        dbError: true,
+        theError: error,
+        users: [],
+        isLoggedIn: req.session.isLoggedIn,
+        name: req.session.name,
+        isAdmin: req.session.isAdmin
+      };
+      res.render('users.handlebars', model);
+    } else {
+      const model = {
+        dbError: false,
+        theError: "",
+        users: theUsers,
+        isLoggedIn: req.session.isLoggedIn,
+        name: req.session.name,
+        isAdmin: req.session.isAdmin
+      };
+      res.render('users.handlebars', model);
+    }
+  });
+});
 
+// Delete a user
+app.get('/users/delete/:id', (req, res) => {
+  const id = req.params.id;
+  if (req.session.isLoggedIn && req.session.isAdmin) {
+    db.run("DELETE FROM users WHERE id=?", [id], function (error) {
+      if (error) {
+        const model = {
+          dbError: true,
+          theError: error,
+          isLoggedIn: req.session.isLoggedIn,
+          name: req.session.name,
+          isAdmin: req.session.isAdmin,
+        };
+        res.render('home.handlebars', model);
+      } else {
+        const model = {
+          dbError: false,
+          theError: "",
+          isLoggedIn: req.session.isLoggedIn,
+          name: req.session.name,
+          isAdmin: req.session.isAdmin,
+        };
+        res.render('home.handlebars', model);
+      }
+    });
+  } else {
+    res.redirect('/login');
+  }
+});
+
+// Render the form for creating a new user
+app.get('/users/new', (req, res) => {
+  if (req.session.isLoggedIn && req.session.isAdmin) {
+    const model = {
+      isLoggedIn: req.session.isLoggedIn,
+      name: req.session.name,
+      isAdmin: req.session.isAdmin,
+    };
+    res.render('newuser.handlebars', model);
+  } else {
+    res.redirect('/login');
+  }
+});
+
+// Create a new user
+app.post('/users/new', (req, res) => {
+  const { username, password, isAdmin } = req.body;
+  const hashedPassword = bcrypt.hashSync(password, 10);
+  const newUser = [username, hashedPassword, isAdmin === 'on'];
+
+  if (req.session.isLoggedIn && req.session.isAdmin) {
+    db.run("INSERT INTO users (username, password, isAdmin) VALUES (?, ?, ?)", newUser, (error) => {
+      if (error) {
+        console.log("ERROR: ", error);
+      } else {
+        console.log("User added to the users table!");
+      }
+      res.redirect('/home');
+    });
+  } else {
+    res.redirect('/login');
+  }
+});
+
+  // Render the form for updating a user
+  app.get('/users/update/:id', (req, res) => {
+    const id = req.params.id;
+    db.get('SELECT * FROM users WHERE id=?', [id], function (error, theUser) {
+      if (error) {
+        const model = {
+          dbError: true,
+          theError: error,
+          user: {},
+          isLoggedIn: req.session.isLoggedIn,
+          name: req.session.name,
+          isAdmin: req.session.isAdmin,
+        };
+        res.render('updateuser.handlebars', model);
+      } else {
+        const model = {
+          dbError: false,
+          theError: '',
+          user: theUser,
+          isLoggedIn: req.session.isLoggedIn,
+          name: req.session.name,
+          isAdmin: req.session.isAdmin,
+          helpers: {
+            theTypeA(value) { return value == "Admin"; },
+            theTypeU(value) { return value == "User"; },
+          }
+        };
+        res.render('updateuser.handlebars', model);
+      }
+    });
+  });
+
+// Update a user
+app.post('/users/update/:id', (req, res) => {
+  const id = req.params.id;
+  const { username, password, isAdmin } = req.body;
+  const hashedPassword = bcrypt.hashSync(password, 10);
+
+  if (req.session.isLoggedIn && req.session.isAdmin) {
+    db.run(
+      'UPDATE users SET username=?, password=?, isAdmin=? WHERE id=?',
+      [username, hashedPassword, isAdmin === 'on', id],
+      (error) => {
+        if (error) {
+          console.log('ERROR: ', error);
+        } else {
+          console.log('User updated!');
+        }
+        res.redirect('/home');
+      }
+    );
+  } else {
+    res.redirect('/login');
+  }
+});

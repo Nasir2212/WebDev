@@ -13,6 +13,9 @@
                     Hi, {{name}}!
                 </a>
                 <ul class="menu">
+                    {{#if isAdmin}}
+                    <a href="/users" class="btn btn-link" id="black-login-btn">Users</a>
+                    {{/if}}
                     <a href="/logout" class="btn btn-link" id="black-login-btn">Logout</a>
                 </ul>
             </div>

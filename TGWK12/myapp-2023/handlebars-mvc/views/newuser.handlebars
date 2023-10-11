@@ -1,0 +1,32 @@
+<div id="main">
+    <div>
+        <h1>New User</h1>
+        <div>
+            {{#if isLoggedIn}}
+                {{#if isAdmin}}
+                    <form action="/users/new" method="post">
+                        <fieldset>
+                            <label for="username">Username:</label>
+                            <input type="text" name="username" id="username" required="required">
+                            <br />
+                            <label for="password">Password:</label>
+                            <input type="password" name="password" id="password" required="required">
+                            <br />
+                            <label for="isAdmin">Is Admin:</label>
+                            <input type="checkbox" name="isAdmin" id="isAdmin">
+                            <br />
+                        </fieldset>
+                        <input type="submit" value="Add User">
+                    </form>
+                {{else}}
+                    <p>Sorry, you must be an administrator to add a new user!</p>
+                {{/if}}
+            {{else}}
+                <p>
+                    Sorry, you must be logged in to add a new user.<br />
+                    Please go to the <a href="/login">login</a> page.
+                </p>
+            {{/if}}
+        </div>
+    </div>
+</div>
