@@ -653,25 +653,29 @@ app.get('/users/new', (req, res) => {
   }
 });
 
-// Create a new user
+
 app.post('/users/new', (req, res) => {
   const { username, password, isAdmin } = req.body;
-  const hashedPassword = bcrypt.hashSync(password, 10);
-  const newUser = [username, hashedPassword, isAdmin === 'on'];
+  const hashedPassword = bcrypt.hashSync(password, 10); // Hash the password
+
+  const newUser = [username, hashedPassword, isAdmin];
 
   if (req.session.isLoggedIn && req.session.isAdmin) {
-    db.run("INSERT INTO users (username, password, isAdmin) VALUES (?, ?, ?)", newUser, (error) => {
+    db.run("INSERT INTO users (username, password_hash, role) VALUES (?, ?, ?)", newUser, (error) => {
       if (error) {
         console.log("ERROR: ", error);
+        res.status(500).send("Internal Server Error"); // or render an error page
       } else {
         console.log("User added to the users table!");
+        res.redirect('/users'); // Redirect to the appropriate page (e.g., /users)
       }
-      res.redirect('/home');
     });
   } else {
     res.redirect('/login');
   }
 });
+
+
 
   // Render the form for updating a user
   app.get('/users/update/:id', (req, res) => {
@@ -696,8 +700,8 @@ app.post('/users/new', (req, res) => {
           name: req.session.name,
           isAdmin: req.session.isAdmin,
           helpers: {
-            theTypeA(value) { return value == "Admin"; },
-            theTypeU(value) { return value == "User"; },
+            theTypeA(value) { return value == "admin"; },
+            theTypeU(value) { return value == "user"; },
           }
         };
         res.render('updateuser.handlebars', model);
@@ -713,8 +717,8 @@ app.post('/users/update/:id', (req, res) => {
 
   if (req.session.isLoggedIn && req.session.isAdmin) {
     db.run(
-      'UPDATE users SET username=?, password=?, isAdmin=? WHERE id=?',
-      [username, hashedPassword, isAdmin === 'on', id],
+      'UPDATE users SET username=?, password_hash=?, role=? WHERE id=?',
+      [username, hashedPassword, isAdmin, id],
       (error) => {
         if (error) {
           console.log('ERROR: ', error);

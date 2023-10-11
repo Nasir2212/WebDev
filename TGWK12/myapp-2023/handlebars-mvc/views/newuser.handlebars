@@ -6,14 +6,17 @@
                 {{#if isAdmin}}
                     <form action="/users/new" method="post">
                         <fieldset>
-                            <label for="username">Username:</label>
+                            <label for="username">Username: </label>
                             <input type="text" name="username" id="username" required="required">
                             <br />
                             <label for="password">Password:</label>
                             <input type="password" name="password" id="password" required="required">
                             <br />
-                            <label for="isAdmin">Is Admin:</label>
-                            <input type="checkbox" name="isAdmin" id="isAdmin">
+                            <label for="isAdmin">Role:</label>
+                            <select name="isAdmin" id="isAdmin" required="required">
+                                <option value="admin">admin</option>
+                                <option value="user">user</option>
+                            </select>
                             <br />
                         </fieldset>
                         <input type="submit" value="Add User">
@@ -23,7 +26,7 @@
                 {{/if}}
             {{else}}
                 <p>
-                    Sorry, you must be logged in to add a new user.<br />
+                    Sorry, you must be logged in as an administrator to add a new user.<br />
                     Please go to the <a href="/login">login</a> page.
                 </p>
             {{/if}}

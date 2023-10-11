@@ -4,25 +4,23 @@
         <div>
             {{#if isLoggedIn}}
                 {{#if isAdmin}}
-            
-                    <form action="/users/update/{{user.uid}}" method="post">
+                    <form action="/users/update/{{user.id}}" method="post">
                         <fieldset>
                             <label for="username">Username: </label>
                             <input type="text" name="username" id="username" value="{{user.username}}" required="required">
                             <br />
                             <label for="password">Password:</label>
-                            <input type="password" name="password" id="password" required="required">
+                            <input type="password" name="password" id="password">
                             <br />
                             <label for="isAdmin">Role:</label>
-                            <select name="isAdmin" id="isAdmin">
-                                <option value="Admin"{{#if (theTypeA user.role)}} selected="selected" {{/if}}>Admin</option>
-                                <option value="User"{{#if (theTypeU user.role)}} selected="selected" {{/if}}>User</option>
+                            <select name="isAdmin" id="isAdmin" required="required">
+                                <option value="admin"{{#if (theTypeA user.role)}} selected="selected" {{/if}}>admin</option>
+                                <option value="user"{{#if (theTypeU user.role)}} selected="selected" {{/if}}>user</option>
                             </select>
                             <br />
                         </fieldset>
                         <input type="submit" value="Update User">
                     </form>
-            
                 {{else}}
                     <p>Sorry, you must be an administrator to update a user!</p>
                 {{/if}}
