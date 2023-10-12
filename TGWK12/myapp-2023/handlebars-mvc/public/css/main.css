@@ -49,9 +49,9 @@ a:hover {
 
 .logo {
     font-size: 24px;
-   padding-left: 3rem;
-   padding-right: 4rem;
-    
+    padding-left: 3rem;
+    padding-right: 4rem;
+
 }
 
 .logo:hover {
@@ -61,7 +61,7 @@ a:hover {
 #main {
     width: 90%;
     margin: 0 auto;
-
+ 
 }
 
 .card {
@@ -82,7 +82,7 @@ a:hover {
     padding: 8px;
     border-radius: 16px;
     background-color: white;
-   
+
 }
 
 
@@ -112,18 +112,29 @@ a,
     align-items: center;
     justify-content: center;
 
-    
+
 }
-#section_pic-container
-{   
-    
-    justify-content: center;
-}
-#sectio_text {
+
+#section_pic-container {
+
     justify-content: center;
 }
 
-@media screen and (max-width: 900px) {
+#section_text {
+    justify-content: center;
+}
+
+.card-link:hover {
+    text-decoration: none;
+}
+
+.card-footer {
+
+    justify-content: center;
+}
+
+
+@media screen and (max-width: 1200px) {
     .columns {
         flex-direction: column;
         /* Stack columns vertically on smaller screens */
@@ -152,12 +163,16 @@ a,
         margin-bottom: 10px;
         /* Add bottom margin for spacing between logo and items on small screens */
     }
-    #section_pic-container
-    {   
+
+    #section_pic-container {
         width: 150px;
         display: block;
         margin-top: 200px;
         justify-content: center;
     }
-    
+
+    #main {
+        margin-top: 200px;
+    }
+
 }

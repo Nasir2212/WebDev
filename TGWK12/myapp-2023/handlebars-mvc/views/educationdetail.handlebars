@@ -13,32 +13,28 @@
                 {{theError}} 
             </div>
             {{else}}
-            {{#each education}}
             <div class="column col-5 col-md-5 col-sm-12">
                 <div class="card">
-                    <a class="card-link" href="/educationdetail/{{eid}}">
                     <div class="card-image">
-                        <img src="{{eimgURL}}" alt="{{eimgURL}}" class="img-responsive">
+                        <img src="{{education.eimgURL}}" alt="{{education.eimgURL}}" class="img-responsive">
                     </div>
                     <div class="card-header">
-                        <div class="card-title h3">{{ename}}</div>
-                        <div class="card-subtilte text-grey">{{eyear}} --- {{etype}}</div>
+                        <div class="card-title h3">{{education.ename}}</div>
+                        <div class="card-subtilte text-grey">{{education.eyear}} --- {{education.etype}}</div>
                     </div>
                     <div class="card-desc">
-                        {{edesc}}
+                        {{education.edesc}}
                     </div>
                     <div class="card-footer">
                         {{#if ../isAdmin}}
                         <div>
-                            <a href="/education/update/{{eid}}"> Modify </a> - <a href="/education/delete/{{eid}}" class="important"> Delete</a>
+                            <a href="/education/update/{{education.eid}}"> Modify </a> - <a href="/education/delete/{{education.eid}}" class="important"> Delete</a>
                         </div>
                         {{/if}}
                     </div>
-                    </a>
                 </div>
             </div>
             <div class="column col-1 col-md-1 "></div>
-            {{/each}}
             {{/if}}
         </div>
     </div>

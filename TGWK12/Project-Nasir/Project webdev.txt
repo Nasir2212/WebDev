@@ -1,17 +1,16 @@
 Project webdev
-- 5 tables 
-Tables
-Done project-table
-Done user-table
-Done education-table
-skills-table
-contact-table
 
-Done Security 
 
-ask about - session and cookies
+Hidden url
 
-use crud operations(among get,post,put,delete) 
+user management don,t have app.put and 
+app.delete
 
-CSS framework
+pagination
 
+klick projects and education'
+
+
+
+question database how many tables
+and get for projects

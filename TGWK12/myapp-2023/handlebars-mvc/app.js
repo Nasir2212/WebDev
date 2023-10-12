@@ -116,7 +116,7 @@ db.run("CREATE TABLE projects (pid INTEGER PRIMARY KEY, pname TEXT NOT NULL, pye
     const projects = [
       {
         "id": "1", "name": "Tictactoe", "type": "Programming", "desc": "The purpose of this project is to learn how to code in java and how to use the mvc-model to follow the oop-princples and make the tictactoe game",
-         "year": 2023, "url": "/img/tictactoe.jpg"
+        "year": 2023, "url": "/img/tictactoe.jpg"
       },
       {
         "id": "2", "name": "Encryption project", "type": "Programming", "desc": "The project takes in a text and depending on the encryption-key it changes exampel abc with the encrypt key 4 to lin and with the decrypt button switches back to abc. It is useful for doctors to view in 3D their patients and the evolution of a disease.", "year":
@@ -148,15 +148,13 @@ db.run("CREATE TABLE IF NOT EXISTS education_projects (id INTEGER PRIMARY KEY, e
     console.log("ERROR: ", error);
   } else {
     console.log("---> Table education_projects created!");
-
-    
     const educationProjectsData = [
       { "id": 1, "education_id": 2, "project_id": 1 },
       { "id": 2, "education_id": 2, "project_id": 2 },
       { "id": 3, "education_id": 3, "project_id": 4 },
       { "id": 4, "education_id": 4, "project_id": 4 },
-      
-    
+
+
     ];
 
     // inserts education_projects data
@@ -171,6 +169,35 @@ db.run("CREATE TABLE IF NOT EXISTS education_projects (id INTEGER PRIMARY KEY, e
     });
   }
 });
+// creates table skills at startup
+db.run("CREATE TABLE IF NOT EXISTS skills (id INTEGER PRIMARY KEY, skill_name TEXT)", (error) => {
+  if (error) {
+    console.log("ERROR: ", error);
+  } else {
+    console.log("---> Table skills created!");
+    const skillsData = [
+      { "id": 1, "skill_name": "Java" },
+      { "id": 2, "skill_name": "Object-Oriented Programming" },
+      { "id": 3, "skill_name": "HTML" },
+      { "id": 4, "skill_name": "CSS" },
+      { "id":5 , "skill_name": "Javascript"},
+      
+    ];
+
+    // inserts skills data
+    skillsData.forEach((skill) => {
+      db.run("INSERT INTO skills (id, skill_name) VALUES (?, ?)", [skill.id, skill.skill_name], (error) => {
+        if (error) {
+          console.log("ERROR: ", error);
+        } else {
+          console.log("Line added into the skills table!");
+        }
+      });
+    });
+  }
+});
+
+
 
 // defines handlebars engine
 app.engine('handlebars', engine());
@@ -217,6 +244,32 @@ app.get('/about', (req, res) => {
   res.render('about.handlebars', model)
 });
 
+app.get('/skills', (req, res) => {
+  db.all("SELECT * FROM skills", (error, skillsData) => {
+    if (error) {
+      const model = {
+        hasDatabaseError: true,
+        theError: error,
+        skillsData: [],
+        isLoggedIn: req.session.isLoggedIn,
+        name: req.session.name,
+        isAdmin: req.session.isAdmin
+      };
+      res.render('skills.handlebars', model);
+    } else {
+      const model = {
+        hasDatabaseError: false,
+        theError: "",
+        skillsData: skillsData,
+        isLoggedIn: req.session.isLoggedIn,
+        name: req.session.name,
+        isAdmin: req.session.isAdmin
+      };
+      res.render('skills.handlebars', model);
+    }
+  });
+});
+
 //education starts here
 
 app.get('/education', function (request, response) {
@@ -245,6 +298,41 @@ app.get('/education', function (request, response) {
     }
   });
 });
+
+
+
+
+  app.get('/educationdetail/:id', (req, res) => {
+    const id = req.params.id
+    db.get("SELECT * FROM education WHERE eid=?", [id], function (error, theEducations) {
+        if (error) {
+            console.log("ERROR: ", error)
+            const model = {
+                dbError: true,
+                theError: error,
+                education: [],
+                isLoggedIn: req.session.isLoggedIn,
+                name: req.session.name,
+                isAdmin: req.session.isAdmin
+            }
+            // renders the page with the model
+            res.render("educationdetail", model)
+        }
+        else {
+            console.log("Education DETAILS")
+            const model = {
+                dbError: false,
+                theError: "",
+                education: theEducations,
+                isLoggedIn: req.session.isLoggedIn,
+                name: req.session.name,
+                isAdmin: req.session.isAdmin
+            }
+            // renders the page with the model
+            res.render("educationdetail", model)
+        }
+    })
+  });
 
 //deletes a education
 app.get('/education/delete/:id', (req, res) => {
@@ -392,6 +480,37 @@ app.get('/projects', function (request, response) {
   });
 });
 
+app.get('/projectsdetail/:id', (req, res) => {
+  const id = req.params.id
+  db.get("SELECT * FROM projects WHERE pid=?", [id], function (error, theProject) {
+      if (error) {
+          console.log("ERROR: ", error)
+          const model = {
+              dbError: true,
+              theError: error,
+              project: [],
+              isLoggedIn: req.session.isLoggedIn,
+              name: req.session.name,
+              isAdmin: req.session.isAdmin
+          }
+          // renders the page with the model
+          res.render("projectsdetail", model)
+      }
+      else {
+          console.log("PROJECT DETAILS")
+          const model = {
+              dbError: false,
+              theError: "",
+              project: theProject,
+              isLoggedIn: req.session.isLoggedIn,
+              name: req.session.name,
+              isAdmin: req.session.isAdmin
+          }
+          // renders the page with the model
+          res.render("projectsdetail", model)
+      }
+  })
+});
 
 
 //deletes a project
@@ -654,6 +773,9 @@ app.get('/users/new', (req, res) => {
 });
 
 
+
+
+
 app.post('/users/new', (req, res) => {
   const { username, password, isAdmin } = req.body;
   const hashedPassword = bcrypt.hashSync(password, 10); // Hash the password
@@ -677,37 +799,37 @@ app.post('/users/new', (req, res) => {
 
 
 
-  // Render the form for updating a user
-  app.get('/users/update/:id', (req, res) => {
-    const id = req.params.id;
-    db.get('SELECT * FROM users WHERE id=?', [id], function (error, theUser) {
-      if (error) {
-        const model = {
-          dbError: true,
-          theError: error,
-          user: {},
-          isLoggedIn: req.session.isLoggedIn,
-          name: req.session.name,
-          isAdmin: req.session.isAdmin,
-        };
-        res.render('updateuser.handlebars', model);
-      } else {
-        const model = {
-          dbError: false,
-          theError: '',
-          user: theUser,
-          isLoggedIn: req.session.isLoggedIn,
-          name: req.session.name,
-          isAdmin: req.session.isAdmin,
-          helpers: {
-            theTypeA(value) { return value == "admin"; },
-            theTypeU(value) { return value == "user"; },
-          }
-        };
-        res.render('updateuser.handlebars', model);
-      }
-    });
+// Render the form for updating a user
+app.get('/users/update/:id', (req, res) => {
+  const id = req.params.id;
+  db.get('SELECT * FROM users WHERE id=?', [id], function (error, theUser) {
+    if (error) {
+      const model = {
+        dbError: true,
+        theError: error,
+        user: {},
+        isLoggedIn: req.session.isLoggedIn,
+        name: req.session.name,
+        isAdmin: req.session.isAdmin,
+      };
+      res.render('updateuser.handlebars', model);
+    } else {
+      const model = {
+        dbError: false,
+        theError: '',
+        user: theUser,
+        isLoggedIn: req.session.isLoggedIn,
+        name: req.session.name,
+        isAdmin: req.session.isAdmin,
+        helpers: {
+          theTypeA(value) { return value == "admin"; },
+          theTypeU(value) { return value == "user"; },
+        }
+      };
+      res.render('updateuser.handlebars', model);
+    }
   });
+});
 
 // Update a user
 app.post('/users/update/:id', (req, res) => {

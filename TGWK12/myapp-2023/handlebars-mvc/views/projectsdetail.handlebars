@@ -14,32 +14,30 @@
                 {{theError}} 
             </div>
             {{else}}
-            {{#each projects}}
             <div class="column col-5 col-md-5 col-sm-12">
                 <div class="card">
-                    <a class="card-link" href="/projectsdetail/{{pid}}">
+                    <a class="card-link" href="/projectsdetail/{{project.pid}}">
                     <div class="card-image">
-                        <img src="{{pimgURL}}" alt="{{pimgURL}}" class="img-responsive">
+                        <img src="{{project.pimgURL}}" alt="{{project.pimgURL}}" class="img-responsive">
                     </div>
                     <div class="card-header">
-                        <div class="card-title h3">{{pname}}</div>
-                        <div class="card-subtilte text-grey">{{pyear}} --- {{ptype}}</div>
+                        <div class="card-title h3">{{project.pname}}</div>
+                        <div class="card-subtilte text-grey">{{project.pyear}} --- {{project.ptype}}</div>
                     </div>
                     <div class="card-text">
-                        <div class="card-desc">{{pdesc}}</div>
+                        <div class="card-desc">{{project.pdesc}}</div>
                     </div>
                     </a>
                     <div class="card-footer">
                         {{#if ../isAdmin}}
                         <div>
-                            <a href="/projects/update/{{pid}}"> Modify </a> - <a href="/projects/delete/{{pid}}" class="important"> Delete</a>
+                            <a href="/projects/update/{{project.pid}}"> Modify </a> - <a href="/projects/delete/{{project.pid}}" class="important"> Delete</a>
                         </div>
                         {{/if}}
                     </div>
                 </div>
             </div>
             <div class="column col-1 col-md-1"></div>
-            {{/each}}
             {{/if}}
         </div>
     </div>
