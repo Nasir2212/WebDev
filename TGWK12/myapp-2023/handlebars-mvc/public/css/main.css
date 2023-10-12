@@ -1,11 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap');
 
-
-
 body {
     font-family: 'Poppins', sans-serif;
-    margin: 0;
     padding: 0;
+    margin: 0;
 }
 
 nav,
@@ -61,6 +59,10 @@ a:hover {
 #main {
     width: 90%;
     margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+   
  
 }
 
@@ -73,7 +75,7 @@ a:hover {
     box-sizing: border-box;
     background-color: white;
     margin-bottom: 8px;
-    flex: 1;
+   
     padding: 1.5rem;
 }
 
@@ -111,27 +113,9 @@ a,
     display: flex;
     align-items: center;
     justify-content: center;
-
-
 }
 
-#section_pic-container {
 
-    justify-content: center;
-}
-
-#section_text {
-    justify-content: center;
-}
-
-.card-link:hover {
-    text-decoration: none;
-}
-
-.card-footer {
-
-    justify-content: center;
-}
 
 
 @media screen and (max-width: 1200px) {
@@ -172,7 +156,15 @@ a,
     }
 
     #main {
-        margin-top: 200px;
+        margin-top: 15rem;
+        
     }
-
+    
+    
+}
+@media screen and (max-width: 1600px)
+{
+    a.btn.btn-link {
+        margin-right: 50px;
+    }
 }

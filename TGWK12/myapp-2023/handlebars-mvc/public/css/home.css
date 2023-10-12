@@ -89,13 +89,36 @@
 #button-home-2:hover {
     border: 0.1rem solid rgb(255, 255, 255);
 }
+@media screen and (max-width: 1200px) {
+    #section {
+        margin: 0 2rem; /* Adjust margin for smaller screens */
+    }
 
-@media screen and (max-width: 900px) {
-    
-    #section_pic-container
-    {   
-        
-        margin-top: 250px;
-        
+    #section-container {
+        flex-direction: column; /* Stack flex items vertically on smaller screens */
+    }
+
+    #profile {
+        flex-direction: column; /* Stack profile items vertically on smaller screens */
+        height: auto; /* Adjust height to fit content */
+    }
+
+    #section_pic-container {
+        width: 100%; /* Make the image container full-width */
+        max-width: 400px; /* Set a maximum width for better readability */
+        margin: auto; /* Center the image */
+    }
+
+    #section_text {
+        padding-top: 20px; /* Adjust padding for smaller screens */
+    }
+
+    #buttoncontainer {
+        flex-direction: column; /* Stack buttons vertically on smaller screens */
+        gap: 1rem; /* Add some space between buttons */
+    }
+
+    #button-home-1, #button-home-2 {
+        width: 100%; /* Make buttons full-width */
     }
 }

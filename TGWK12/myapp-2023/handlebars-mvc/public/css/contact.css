@@ -1,4 +1,6 @@
 #main {
+    display: flex;
+    justify-content: center;
     max-width: 600px;
     margin: 0 auto;
     padding: 20px;
@@ -29,4 +31,15 @@ a {
 
 a:hover {
     text-decoration: underline;
+}
+
+@media screen and (max-width: 1200px) {
+   
+
+    #main {
+       margin-top: 15rem;
+    }
+    
+
+
 }
