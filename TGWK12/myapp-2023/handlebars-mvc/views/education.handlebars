@@ -1,5 +1,5 @@
 
-<link rel="stylesheet" href="/css/education.css">
+<link rel="stylesheet" href="/css/project.css">
 <div id="main">
     <div class="container">
         <h1>Education</h1>
@@ -29,14 +29,14 @@
                     <div class="card-desc">
                         {{edesc}}
                     </div>
+                    </a>
                     <div class="card-footer">
                         {{#if ../isAdmin}}
                         <div>
-                            <a href="/education/update/{{eid}}"> Modify </a> - <a href="/education/delete/{{eid}}" class="important"> Delete</a>
+                            <a href="/education/update/{{eid}}"> Modify </a>  <a href="/education/delete/{{eid}}" class="important"> Delete</a>
                         </div>
                         {{/if}}
                     </div>
-                    </a>
                 </div>
             </div>
             <div class="column col-1 col-md-1 "></div>
