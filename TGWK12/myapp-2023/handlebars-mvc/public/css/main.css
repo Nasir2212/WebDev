@@ -104,7 +104,7 @@ a,
     /* Add a transition effect for a smooth color change */
 }
 
-.btn.btn-link:hover {
+.btn.btn-link:hover {   
     color: #333;
     /* Darken the color on hover */
 }
@@ -115,6 +115,43 @@ a,
     justify-content: center;
 }
 
+/* Add this to your existing CSS or create a new CSS file */
+
+.pagination {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    justify-content: center;
+    margin-top: 20px; /* Adjust as needed */
+}
+
+.pagination li {
+    margin: 0 5px; /* Adjust as needed */
+
+}
+
+.pagination a,
+.pagination span {
+
+    padding: 8px 12px; /* Adjust as needed */
+    text-decoration: none;
+    background-color: #f2f2f2; /* Background color */
+    color: #333; /* Text color */
+    border: 1px solid #ddd; /* Border color */
+    border-radius: 4px;
+    cursor: pointer;
+    margin-right: 1rem;
+    
+}
+
+.pagination a:hover {
+    background-color: #ddd; /* Hover background color */
+}
+
+.pagination .active span {
+    background-color: #4CAF50; /* Active page background color */
+    color: white; /* Active page text color */
+}
 
 
 
@@ -159,6 +196,14 @@ a,
         margin-top: 15rem;
         
     }
+    .pagination li {
+        margin: 0 3px; /* Adjust margin for smaller screens */
+    }
+
+    .pagination a,
+    .pagination span {
+        padding: 6px 10px; /* Adjust padding for smaller screens */
+    }
     
     
 }
@@ -166,5 +211,14 @@ a,
 {
     a.btn.btn-link {
         margin-right: 50px;
+    }
+}
+@media screen and (max-width: 600px)
+{
+    .pagination {
+        display: flex;
+        text-align: center;
+        width: 300px;
+        margin-right: 1rem;
     }
 }

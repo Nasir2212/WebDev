@@ -4,7 +4,7 @@
         <div>
             {{#if isLoggedIn}}
                 {{#if isAdmin}}
-                    <form action="/users/new" method="post">
+                    <form action="/users/new/{{pagination.page}}" method="post">
                         <fieldset>
                             <label for="username">Username: </label>
                             <input type="text" name="username" id="username" required="required">

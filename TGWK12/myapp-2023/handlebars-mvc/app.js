@@ -41,9 +41,15 @@ db.run("CREATE TABLE IF NOT EXISTS users (id INTEGER PRIMARY KEY AUTOINCREMENT, 
     const users = [
       { "username": "Yuji", "password_hash": "itadori", "role": "admin" },
       { "username": "Toji", "password_hash": "itadori", "role": "user" },
-      { "username": "Nasir", "password_hash": "jama elmi", "role": "user" },
+      { "username": "Nasir", "password_hash": "jama elmi", "role": "admin" },
       { "username": "Hero", "password_hash": "Batman", "role": "user" },
-      { "username": "Best-Teacher", "password_hash": "Jerome", "role": "admin" }
+      { "username": "Best-Teacher", "password_hash": "Jerome", "role": "admin" },
+      { "username": "Jerome", "password_hash": "Landre", "role": "admin" },
+      { "username": "SQL", "password_hash": "Query", "role": "user" },
+      { "username": "DB", "password_hash": "DB", "role": "user" },
+      { "username": "Java", "password_hash": "script", "role": "user" },
+      { "username": "Hashing", "password_hash": "crypt", "role": "admin" },
+      { "username": "Temp", "password_hash": "Temp", "role": "user" },
     ];
 
     users.forEach((user) => {
@@ -702,6 +708,7 @@ app.get('/logout', (req, res) => {
 });
 
 // List all users
+/*
 app.get('/users', function (req, res) {
   db.all("SELECT * FROM users", function (error, theUsers) {
     if (error) {
@@ -727,6 +734,73 @@ app.get('/users', function (req, res) {
     }
   });
 });
+*/
+  const itemsPerPage = 3; // Adjust the number of items per page as needed
+
+  app.get('/users/:page', function (req, res) {
+    const page = req.params.page || 1; // Default to page 1 if not specified
+    const offset = (page - 1) * itemsPerPage;
+
+    // Fetch users for the current page
+    db.all(`SELECT * FROM users LIMIT ${itemsPerPage} OFFSET ${offset}`, function (error, theUsers) {
+      if (error) {
+        const model = {
+          dbError: true,
+          theError: error,
+          users: [],
+          isLoggedIn: req.session.isLoggedIn,
+          name: req.session.name,
+          isAdmin: req.session.isAdmin,
+        };
+        res.render('users.handlebars', model);
+      } else {
+        // Fetch total count of users
+        db.get('SELECT COUNT(*) AS count FROM users', function (error, result) {
+          if (error) {
+            const model = {
+              dbError: true,
+              theError: error,
+              users: [],
+              isLoggedIn: req.session.isLoggedIn,
+              name: req.session.name,
+              isAdmin: req.session.isAdmin,
+            };
+            res.render('users.handlebars', model);
+          } else {
+            const totalCount = result.count;
+            const totalPages = Math.ceil(totalCount / itemsPerPage);
+
+            // Generate an array of page numbers
+            const pages = [];
+            for (let i = 1; i <= totalPages; i++) {
+              pages.push(i);
+            }
+            const nextIndex = pages.indexOf(parseInt(page)) + 1;
+            const nextPage = nextIndex < pages.length ? pages[nextIndex] : null;
+            const model = {
+              dbError: false,
+              theError: "",
+              users: theUsers,
+              isLoggedIn: req.session.isLoggedIn,
+              name: req.session.name,
+              isAdmin: req.session.isAdmin,
+              pagination: {
+                page: parseInt(page),
+                totalPages: totalPages,
+                pages: pages, // Add the 'pages' array to the model
+                hasPrev: page > 1,
+                hasNext: page < totalPages,
+                PrevPage: page - 1 ,
+                NextPage: nextPage
+              },
+            };
+            res.render('users.handlebars', model);
+          }
+        });
+      }
+    });
+  });
+
 
 // Delete a user
 app.get('/users/delete/:id', (req, res) => {
@@ -759,7 +833,7 @@ app.get('/users/delete/:id', (req, res) => {
 });
 
 // Render the form for creating a new user
-app.get('/users/new', (req, res) => {
+app.get('/users/new/:page', (req, res) => {
   if (req.session.isLoggedIn && req.session.isAdmin) {
     const model = {
       isLoggedIn: req.session.isLoggedIn,
@@ -789,7 +863,7 @@ app.post('/users/new', (req, res) => {
         res.status(500).send("Internal Server Error"); // or render an error page
       } else {
         console.log("User added to the users table!");
-        res.redirect('/users'); // Redirect to the appropriate page (e.g., /users)
+        res.redirect('/home');
       }
     });
   } else {
@@ -854,3 +928,5 @@ app.post('/users/update/:id', (req, res) => {
     res.redirect('/login');
   }
 });
+
+
