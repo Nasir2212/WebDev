@@ -417,8 +417,7 @@ app.get('/education/update/:id', (req, res) => {
       res.render("modifyeducation.handlebars", model)
     }
     else {
-      //console.log("MODIFY: ", JSON.stringify(theEducation))
-      //console.log("MODIFY: ", theEducation)
+     
       const model = {
         dbError: false, theError: "",
         education: theEducations,
@@ -596,8 +595,7 @@ app.get('/projects/update/:id', (req, res) => {
       res.render("modifyproject.handlebars", model)
     }
     else {
-      //console.log("MODIFY: ", JSON.stringify(theProject))
-      //console.log("MODIFY: ", theProject)
+  
       const model = {
         dbError: false, theError: "",
         project: theProject,
@@ -681,7 +679,7 @@ app.post('/login', (req, res) => {
         } else if (result) {
           // Passwords match, login successful
           console.log("Login successful");
-          req.session.isAdmin = user.role === 'admin'; // You may set other session variables as needed
+          req.session.isAdmin = user.role === 'admin';
           req.session.isLoggedIn = true;
           req.session.name = user.username;
           res.redirect('/');
