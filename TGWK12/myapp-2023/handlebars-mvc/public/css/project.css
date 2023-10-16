@@ -5,3 +5,9 @@
   
     justify-content: center;
 }
+.card-image-detail{
+    display: flex;
+    justify-content: center;
+    
+   
+}

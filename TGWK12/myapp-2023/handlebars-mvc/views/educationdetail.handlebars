@@ -1,3 +1,4 @@
+<link rel="stylesheet" href="/css/education.css">
 <div id="main">
     <div class="container">
         <h1>Education</h1>
@@ -13,9 +14,11 @@
                 {{theError}} 
             </div>
             {{else}}
-            <div class="column col-5 col-md-5 col-sm-12">
+           
+            <div class="column col-12 col-md-12 col-sm-12">
                 <div class="card">
-                    <div class="card-image">
+                     <a class="card-link" href="/educationdetail/{{education.eid}}">
+                    <div class="card-image-detail">
                         <img src="{{education.eimgURL}}" alt="{{education.eimgURL}}" class="img-responsive">
                     </div>
                     <div class="card-header">
@@ -25,6 +28,7 @@
                     <div class="card-desc">
                         {{education.edesc}}
                     </div>
+                    </a>
                     <div class="card-footer">
                         {{#if ../isAdmin}}
                         <div>
@@ -34,7 +38,7 @@
                     </div>
                 </div>
             </div>
-            <div class="column col-1 col-md-1 "></div>
+            
             {{/if}}
         </div>
     </div>

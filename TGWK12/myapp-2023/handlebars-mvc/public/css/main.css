@@ -204,6 +204,7 @@ a,
     .pagination span {
         padding: 6px 10px; /* Adjust padding for smaller screens */
     }
+    
    
     
 }
@@ -220,5 +221,13 @@ a,
         text-align: center;
         width: 300px;
         margin-right: 1rem;
+    }
+}
+@media screen and (max-width: 300px)
+{
+    .pagination {
+       
+        width: 300px;
+        
     }
 }

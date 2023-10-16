@@ -1,7 +1,13 @@
+
 .card-link:hover {
     text-decoration: none;
-   }
-   .card-footer{
+}
 
-       justify-content: center;
-   }
+.card-footer {
+
+    justify-content: center;
+}
+.card-image-detail{
+    display: flex;
+    justify-content: center;
+}
