@@ -94,6 +94,9 @@ db.run("CREATE TABLE IF NOT EXISTS education (eid INTEGER PRIMARY KEY, ename TEX
       {
         "id": "4", "name": "Database", "type": "course", "desc": "Study of database and sql and how to create tables and their diffrent use purpose", "year": 2023, "url": "/img/web.jpg"
       },
+      {
+        "id": "5", "name": "Linear algebra", "type": "course", "desc": "Study of linear algebra is about vector and also in third dimensional way. Matrices in a 2 dimenstional array that represents equations", "year": 2022, "url": "/img/math.jpg"
+      },
     ];
 
     // inserts education data
@@ -112,7 +115,7 @@ db.run("CREATE TABLE IF NOT EXISTS education (eid INTEGER PRIMARY KEY, ename TEX
 
 
 // creates table projects at startup
-db.run("CREATE TABLE projects (pid INTEGER PRIMARY KEY, pname TEXT NOT NULL, pyear INTEGER NOT NULL, pdesc TEXT NOT NULL, ptype TEXT NOT NULL, pimgURL TEXT NOT NULL)", (error) => {
+db.run("CREATE TABLE IF NOT EXISTS projects (pid INTEGER PRIMARY KEY, pname TEXT NOT NULL, pyear INTEGER NOT NULL, pdesc TEXT NOT NULL, ptype TEXT NOT NULL, pimgURL TEXT NOT NULL)", (error) => {
   if (error) {
     // tests error: display error
     console.log("ERROR: ", error)
@@ -132,7 +135,11 @@ db.run("CREATE TABLE projects (pid INTEGER PRIMARY KEY, pname TEXT NOT NULL, pye
       {
         "id": "4", "name": "Web development", "desc": "Creating a full functional website with a database and server-side javascript. We combine all of this in order to create a responsive and modern website platform", "year": 2023, "type": "Project",
         "url": "/img/Web-site.png"
-      }
+      },
+      {
+        "id": "5", "name": "Domain model", "desc": "Conceptual diagram which is an ULM diagram, Thats showcases the classes in a conceptual state and have relations, assocations. ", "year": 2023, "type": "Project",
+        "url": "/img/Domain-Model-PartA.jpg"
+      },  
     ]
     // inserts projects
     projects.forEach((oneProject) => {
@@ -148,7 +155,7 @@ db.run("CREATE TABLE projects (pid INTEGER PRIMARY KEY, pname TEXT NOT NULL, pye
   }
 });
 
-// creates table education_projects at startup
+// creates table education_projects at startup MIDDEL TABLE BUT DON,T USE
 db.run("CREATE TABLE IF NOT EXISTS education_projects (id INTEGER PRIMARY KEY, education_id INTEGER, project_id INTEGER, FOREIGN KEY (education_id) REFERENCES education (eid), FOREIGN KEY (project_id) REFERENCES projects (pid))", (error) => {
   if (error) {
     console.log("ERROR: ", error);
@@ -159,7 +166,7 @@ db.run("CREATE TABLE IF NOT EXISTS education_projects (id INTEGER PRIMARY KEY, e
       { "id": 2, "education_id": 2, "project_id": 2 },
       { "id": 3, "education_id": 3, "project_id": 4 },
       { "id": 4, "education_id": 4, "project_id": 4 },
-
+     
 
     ];
 
