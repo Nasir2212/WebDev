@@ -49,12 +49,3 @@ input[type="submit"]:hover {
     background-color: #45a049;
 }
 
-@media screen and (max-width: 900px) {
-    
-    #main
-    {   
-        
-        margin-top: 150px;
-        
-    }
-}
